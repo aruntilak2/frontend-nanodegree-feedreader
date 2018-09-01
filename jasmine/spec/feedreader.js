@@ -3,7 +3,6 @@
  * This is the spec file that Jasmine will read and contains
  * all of the tests that will be run against your application.
  */
-
 /* We're placing all of our tests within the $() function,
  * since some of these tests may require DOM elements. We want
  * to ensure they don't run until the DOM is ready.
@@ -32,19 +31,9 @@ $(function() {
         it('URL defined', function(){
             for( let feed of allFeeds){
                 expect(feed.url).toBeDefined();
-                    /*Try*/ expect(feed.name).toBeDefined();
-                // expect(allFeeds.length > 0).not.toBe(0)
-               /*Try*/ expect(allFeeds.length).toBeGreaterThan(0);
- 
+                expect(feed.name).toBeDefined();
+                expect(allFeeds.length).toBeGreaterThan(0);
             }
-//In this test, you should ensure that URLs and names are truthy. 
-// In other words, URLs and names should be defined and should not be an empty string.
-// What your implementation does is ensuring that url is defined. Try setting any of urls to "", 
-// test will pass just fine while it should not
-// allFeeds.length should not be tested here you only want to test actual url
-// 💡 Hint:
-// To fix this make sure that url and name is
-//  defined and the length is greater than 0 
         });
         /* Test that loops through each feed
          * in the allFeeds object and ensures it has a name defined
@@ -80,20 +69,8 @@ $(function() {
             expect(body.classList.contains('menu-hidden')).toBe(false);
             menu.click();
             expect(body.classList.contains('menu-hidden')).toBe(true);
-        
-//  Great job so far.
-//  But you need to click on the menu again and 
-// make sure that menu hides
-// let's click on the menu
-// menu.click();
-// Body should not have menu-hidden class
-
-// let't click menu again
-// menu.click();
-// Body should have menu-hidden class
         });
     });
-
     /*  named "Initial Entries" */
     describe('Initial Entries', function(){
         /* completes its work, there is at least
@@ -126,28 +103,12 @@ $(function() {
             loadFeed(0, function(){
                 Array.from(feed.children).forEach(function(entry){
                 firstFeed.push(entry.innerText);
-                /*Try*/loadFeed(1, function(){
-                    done();
+                    loadFeed(1, function(){
+                        done();
                     });
             });
         });
-            // loadFeed(1, done);
-// Unfortunately, this isn't correct asynchronous implementation. loadFeed(1) will not wait for loadFeed(0) to receive a response from server.
-// To solve this you simply nest loadFeed(1) inside of loadFeed(0) and therefore ensure that loadFeed(0) receives data from server
-
-// 💡 Hint:
-
-// let feedAfterFirstLoad;
-// let feedAfterSecondLoad;
-
-// beforeEach(function(done){
-//   loadFeed(0, function () {
-        // great place to get content of feed container
-        // you can use jQuery .html or .innerHTML method to do that for You
-    //  loadFeed(1, function () {
-            // get content of feed container again
-        //  done();
-        });
+    });
         it('Content Changes',function(){
             Array.from(feed.children).forEach(function(entry,index){
             console.log(entry.innerText, firstFeed[index], entry.innerText===firstFeed[index]);
